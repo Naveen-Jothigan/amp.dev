@@ -21,6 +21,7 @@ const URL = require('url').URL;
 const LRU = require('lru-cache');
 const config = require('@lib/config');
 const {Templates, createRequestContext} = require('@lib/templates/index.js');
+const imageOptimizer = require('../utils/imageOptimizer');
 const AmpOptimizer = require('@ampproject/toolbox-optimizer');
 const CssTransformer = require('@lib/utils/cssTransformer');
 const pageCache = require('@lib/utils/pageCache');
@@ -178,6 +179,7 @@ const growPages = express.Router();
 const optimizer = AmpOptimizer.create({
   experimentPreloadHeroImage: true,
   preloadHeroImage: true,
+  imageOptimizer,
   transformations: [
     HeadDedupTransformer,
     ...AmpOptimizer.TRANSFORMATIONS_AMP_FIRST,
